@@ -69,6 +69,17 @@ const ogAbs = new URL(ogImage, SITE.url).href;
       ></script>
     )}
 
+    {/* 구글 애널리틱스(GA4): 측정 ID가 있을 때만 로드 */}
+    {ANALYTICS.google && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.google}`} is:inline></script>
+        <script
+          is:inline
+          set:html={`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${ANALYTICS.google}');`}
+        ></script>
+      </>
+    )}
+
     {/* 네이버 애널리틱스(웹로그분석): wa 값이 있을 때만 로드 */}
     {ANALYTICS.naver && (
       <>

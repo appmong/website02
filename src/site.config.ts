@@ -41,6 +41,8 @@ export const ADSENSE = {
 export const ANALYTICS = {
   /** 네이버 애널리틱스(웹로그분석) wa 값. 비우면 미삽입 */
   naver: "18a43854fe85440",
+  /** 구글 애널리틱스(GA4) 측정 ID (G-XXXXXXXXXX). 비우면 미삽입 */
+  google: "G-39G43V6R9F",
 } as const;
 
 // ─────────────────────────────────────────────────────────────
