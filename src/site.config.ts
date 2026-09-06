@@ -24,7 +24,7 @@ export const SITE = {
 // ─────────────────────────────────────────────────────────────
 export const VERIFICATION = {
   google: "", // Search Console 메타 인증 content 값
-  naver: "", // 네이버 웹마스터도구 content 값
+  naver: "4d33626bd4023672dd2f40daaffbac59dac327d4", // 네이버 웹마스터도구 content 값
 } as const;
 
 // ─────────────────────────────────────────────────────────────
