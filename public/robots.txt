@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cplife.co.kr/sitemap-index.xml

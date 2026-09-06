@@ -1,0 +1,15 @@
+---
+import { SITE, CATEGORIES } from "../site.config";
+import { categoryUrl } from "../lib/utils";
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a href="/" class="brand">{SITE.name}</a>
+    <nav class="nav" aria-label="주요 카테고리">
+      {CATEGORIES.map((c) => (
+        <a href={categoryUrl(c.slug)}>{c.name}</a>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,68 @@
+---
+import { FORTUNE_NOTES } from "../site.config";
+
+// 서버에서 미리 하나 골라 초기 렌더 (JS 꺼져 있어도 문구가 보이게)
+const seed = new Date().getFullYear() * 366 + Math.floor(
+  (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86_400_000,
+);
+const initial = FORTUNE_NOTES[seed % FORTUNE_NOTES.length];
+---
+
+<section class="fortune card" aria-label="오늘의 쪽지">
+  <div class="head">
+    <span class="tag">오늘의 쪽지</span>
+    <button type="button" class="redraw" data-redraw aria-label="다시 뽑기">🔄 다시 뽑기</button>
+  </div>
+  <p class="note" data-note>{initial}</p>
+</section>
+
+<script is:inline define:vars={{ notes: FORTUNE_NOTES }}>
+  (function () {
+    const el = document.querySelector("[data-note]");
+    const btn = document.querySelector("[data-redraw]");
+    if (!el || !btn) return;
+
+    const todayKey = new Date().toISOString().slice(0, 10);
+
+    function pickRandom() {
+      return notes[Math.floor(Math.random() * notes.length)];
+    }
+
+    // 하루 한 번은 같은 문구 유지 (재방문 시 이어지는 느낌)
+    try {
+      const saved = JSON.parse(localStorage.getItem("fortune") || "null");
+      if (saved && saved.date === todayKey && saved.text) {
+        el.textContent = saved.text;
+      }
+    } catch (e) {}
+
+    function draw() {
+      const text = pickRandom();
+      el.style.opacity = "0";
+      setTimeout(function () {
+        el.textContent = text;
+        el.style.opacity = "1";
+      }, 150);
+      try {
+        localStorage.setItem("fortune", JSON.stringify({ date: todayKey, text }));
+      } catch (e) {}
+    }
+
+    btn.addEventListener("click", draw);
+  })();
+</script>
+
+<style>
+  .fortune { padding: 16px 20px; margin: 22px 0; background: var(--bg-soft); }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .tag {
+    font-size: 12.5px; font-weight: 800; color: var(--accent-ink);
+    background: var(--accent-soft); padding: 3px 10px; border-radius: 999px;
+  }
+  .redraw {
+    font-size: 13px; color: var(--text-soft); background: transparent;
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; cursor: pointer;
+  }
+  .redraw:hover { border-color: var(--accent); color: var(--accent); }
+  .note { margin: 0; font-size: 16.5px; font-weight: 600; line-height: 1.6; transition: opacity 0.15s ease; }
+</style>
