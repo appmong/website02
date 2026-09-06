@@ -5,7 +5,23 @@ import { categoryUrl } from "../lib/utils";
 
 <header class="site-header">
   <div class="bar">
-    <a href="/" class="brand">{SITE.name}</a>
+    <a href="/" class="brand" aria-label={SITE.name}>
+      <svg
+        class="brand-mark"
+        width="30"
+        height="30"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <rect x="2" y="2" width="28" height="28" rx="8"></rect>
+        <path
+          class="mark-check"
+          d="M9.5 16.6 L14 21 L22.5 11"
+        ></path>
+      </svg>
+      <span class="brand-text">체크포인트 <span class="brand-accent">라이프</span></span>
+    </a>
     <nav class="nav" aria-label="주요 카테고리">
       {CATEGORIES.map((c) => (
         <a href={categoryUrl(c.slug)}>{c.name}</a>
@@ -13,3 +29,32 @@ import { categoryUrl } from "../lib/utils";
     </nav>
   </div>
 </header>
+
+<style>
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .brand-mark {
+    flex: none;
+    display: block;
+  }
+  .brand-mark rect {
+    fill: var(--accent);
+  }
+  .brand-mark .mark-check {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .brand-text {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .brand-accent {
+    color: var(--accent);
+  }
+</style>
