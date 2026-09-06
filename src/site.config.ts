@@ -23,7 +23,7 @@ export const SITE = {
 // 검색엔진 인증 (발급 후 값만 채우면 <head>에 자동 삽입)
 // ─────────────────────────────────────────────────────────────
 export const VERIFICATION = {
-  google: "", // Search Console 메타 인증 content 값
+  google: "yxRoyqmHqUJSjWyNQfgkB9tdSArHUidU4tdykL0AP1Y", // Search Console 메타 인증 content 값
   naver: "4d33626bd4023672dd2f40daaffbac59dac327d4", // 네이버 웹마스터도구 content 값
 } as const;
 
@@ -32,7 +32,15 @@ export const VERIFICATION = {
 // ─────────────────────────────────────────────────────────────
 export const ADSENSE = {
   /** ca-pub-XXXXXXXXXXXXXXXX (승인 신청 시 발급). 비우면 스크립트/ads.txt 미삽입 */
-  clientId: "",
+  clientId: "ca-pub-8144619202927627",
+} as const;
+
+// ─────────────────────────────────────────────────────────────
+// 애널리틱스 (선택)
+// ─────────────────────────────────────────────────────────────
+export const ANALYTICS = {
+  /** 네이버 애널리틱스(웹로그분석) wa 값. 비우면 미삽입 */
+  naver: "18a43854fe85440",
 } as const;
 
 // ─────────────────────────────────────────────────────────────
