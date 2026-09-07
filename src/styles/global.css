@@ -27,8 +27,11 @@
   --maxw-wide: 1080px;
 }
 
+/* 다크 토큰: 값 하나를 두 진입점에서 재사용
+   - OS가 다크이고 사용자가 라이트로 강제하지 않았을 때
+   - 사용자가 토글로 다크를 선택했을 때 */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0d1117;
     --bg-soft: #161b22;
     --bg-card: #161b22;
@@ -45,6 +48,23 @@
     --danger: #f85149;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
   }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117;
+  --bg-soft: #161b22;
+  --bg-card: #161b22;
+  --border: #2b323b;
+  --border-strong: #3a424c;
+  --text: #e6edf3;
+  --text-soft: #b0b8c1;
+  --text-mute: #7d8590;
+  --accent: #5b8cff;
+  --accent-soft: #16233d;
+  --accent-ink: #a9c5ff;
+  --ok: #3fb950;
+  --warn: #e3922b;
+  --danger: #f85149;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* ───────────────────────────────────────────────

@@ -37,6 +37,8 @@ const ogAbs = new URL(ogImage, SITE.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* 테마 선적용 (깜빡임 방지): 저장된 선택이 있으면 페인트 전에 반영 */}
+    <script is:inline set:html={`(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`}></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
 
