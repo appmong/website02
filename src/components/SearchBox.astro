@@ -49,7 +49,6 @@ const index = posts.map((p) => {
   type Item = { t: string; d: string; c: string; e: string; u: string; th: string | null; k: string };
 
   const dialog = document.getElementById("search-dialog") as HTMLDialogElement | null;
-  const openBtn = document.getElementById("search-btn");
   const closeBtn = document.getElementById("search-close");
   const input = document.getElementById("search-input") as HTMLInputElement | null;
   const results = document.getElementById("search-results");
@@ -92,15 +91,19 @@ const index = posts.map((p) => {
     render(list, q);
   }
 
-  function open() {
+  function open(prefill = "") {
     if (!dialog) return;
     dialog.showModal();
-    render([], "");
-    if (input) { input.value = ""; input.focus(); }
+    if (input) input.value = prefill;
+    search();
+    if (input) input.focus();
   }
   function close() { dialog?.close(); }
 
-  openBtn?.addEventListener("click", open);
+  // 여러 트리거 지원: 헤더 버튼, 히어로 검색바, 인기 검색어 칩
+  document.querySelectorAll("[data-search-open]").forEach((el) => {
+    el.addEventListener("click", () => open(el.getAttribute("data-search-q") || ""));
+  });
   closeBtn?.addEventListener("click", close);
   input?.addEventListener("input", search);
   // 배경 클릭 시 닫기
