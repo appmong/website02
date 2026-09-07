@@ -14,6 +14,30 @@ const posts = (await getCollection("posts"))
 
 const featured = posts[0];
 const featCat = featured ? CATEGORY_MAP[featured.data.category] : undefined;
+
+// 사이트 구조화 데이터 (Organization + WebSite)
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#org`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: `${SITE.url}/logo.png`,
+      email: SITE.email,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      name: SITE.name,
+      description: SITE.description,
+      url: SITE.url,
+      inLanguage: "ko-KR",
+      publisher: { "@id": `${SITE.url}/#org` },
+    },
+  ],
+};
 ---
 
 <BaseLayout>
@@ -107,6 +131,8 @@ const featCat = featured ? CATEGORY_MAP[featured.data.category] : undefined;
 
     <SubscribeBox />
   </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
 </BaseLayout>
 
 <style>

@@ -40,7 +40,19 @@ const ogAbs = new URL(ogImage, SITE.url).href;
     {/* 테마 선적용 (깜빡임 방지): 저장된 선택이 있으면 페인트 전에 반영 */}
     <script is:inline set:html={`(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`}></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
+
+    {/* 모바일 브라우저 상단바 색 (라이트/다크) */}
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+
+    {/* 웹폰트 Pretendard (동적 서브셋 — 한글 필요한 글자만 로드) */}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
